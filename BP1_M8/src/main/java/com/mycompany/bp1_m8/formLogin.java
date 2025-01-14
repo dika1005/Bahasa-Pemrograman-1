@@ -32,7 +32,7 @@ public class formLogin extends javax.swing.JFrame {
 
         try {
             st = Koneksi.con.createStatement();
-            rs = st.executeQuery("SELECT Username, Password FROM user");
+            rs = st.executeQuery("SELECT Username, Password FROM User");
             while (rs.next()) {
                 String username = rs.getString("Username");
                 String password = rs.getString("Password");
@@ -67,7 +67,7 @@ public class formLogin extends javax.swing.JFrame {
 
         try {
             st = Koneksi.con.createStatement();
-            rs = st.executeQuery("SELECT Username, Password FROM admin");
+            rs = st.executeQuery("SELECT Username, Password FROM Admin");
             while (rs.next()) {
                 String username = rs.getString("Username");
                 String password = rs.getString("Password");

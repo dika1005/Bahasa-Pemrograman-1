@@ -134,7 +134,7 @@ public class jasper {
 
     private List<Map<String, ?>> fetchData() {
         List<Map<String, ?>> data = new ArrayList<>();
-        String sql = "SELECT NIM, Nama, JK, PRODI, Kelas, Nilai FROM nilaimhs";
+        String sql = "SELECT NIM, Nama, Jk, PRODI, Kelas, Nilai FROM nilaimhs";
 
         try (Connection con = koneksi.con;
              Statement st = con.createStatement();
@@ -144,7 +144,7 @@ public class jasper {
                 Map<String, Object> row = new HashMap<>();
                 row.put("NIM", rs.getString("NIM"));
                 row.put("Nama", rs.getString("Nama"));
-                row.put("JK", rs.getString("JK"));
+                row.put("Jk", rs.getString("Jk"));
                 row.put("PRODI", rs.getString("PRODI"));
                 row.put("Kelas", rs.getString("Kelas"));
                 row.put("Nilai", rs.getString("Nilai"));
