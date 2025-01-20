@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.bp1_m7;
+package com.mycompany.project_teori;
 
 import java.sql.Statement;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -14,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Fujitsu U938
  */
 public class formLogin extends javax.swing.JFrame {
+    private final Koneksi Koneksi;
     Statement st;
     ResultSet rs;
-    Koneksi Koneksi;
+    Koneksi koneksi;
     /**
      * Creates new form P1
      */
@@ -31,13 +33,13 @@ public class formLogin extends javax.swing.JFrame {
         boolean loginSuccess = false;
 
         try {
-            st = Koneksi.con.createStatement();
-            rs = st.executeQuery("SELECT Username, Password FROM user");
+            st = Koneksi.getConnection().createStatement();
+            rs = st.executeQuery("SELECT Nama, Password FROM user");
             while (rs.next()) {
-                String username = rs.getString("Username");
-                String password = rs.getString("Password");
+                String Nama = rs.getString("Nama");
+                String Password = rs.getString("Password");
 
-                if (user.equals(username) && pass.equals(password)) {
+                if (user.equals(Nama) && pass.equals(Password)) {
                     loginSuccess = true;
                     break;
                 }
@@ -51,7 +53,7 @@ public class formLogin extends javax.swing.JFrame {
         } else if (pass.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Password harus diisi", "Login", JOptionPane.ERROR_MESSAGE);
         } else if (loginSuccess) {
-            BP1_M7_DIKA logina = new BP1_M7_DIKA();
+            pemilihan_osis logina = new pemilihan_osis();
             logina.setVisible(true);
             setVisible(false);
             JOptionPane.showMessageDialog(null, "Login Sukses " + user, "Login", JOptionPane.INFORMATION_MESSAGE);
@@ -66,13 +68,14 @@ public class formLogin extends javax.swing.JFrame {
         boolean loginSuccess = false;
 
         try {
-            st = Koneksi.con.createStatement();
-            rs = st.executeQuery("SELECT Username, Password FROM admin");
+            st = Koneksi.getConnection().createStatement();
+           rs = st.executeQuery("SELECT Nama, Password FROM admin");
             while (rs.next()) {
-                String username = rs.getString("Username");
-                String password = rs.getString("Password");
+                String Nama = rs.getString("Nama");
+                String Password = rs.getString("Password");
 
-                if (user.equals(username) && pass.equals(password)) {
+
+                if (user.equals(Nama) && pass.equals(Password)) {
                     loginSuccess = true;
                     break;
                 }
@@ -87,7 +90,42 @@ public class formLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Password harus diisi", "Login", JOptionPane.ERROR_MESSAGE);
         } else if (loginSuccess) {
             JOptionPane.showMessageDialog(null, "Login Sukses " + user, "Login", JOptionPane.INFORMATION_MESSAGE);
-            BP1_M7_DIKA logina = new BP1_M7_DIKA();
+            Suara logina = new Suara();
+            logina.setVisible(true);
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Login Gagal", "Login", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void loginGuru() {
+        String user = jTextField1.getText();
+        String pass = jTextField2.getText();
+        boolean loginSuccess = false;
+
+        try {
+            st = Koneksi.getConnection().createStatement();
+            rs = st.executeQuery("SELECT Nama, Password FROM guru");
+            while (rs.next()) {
+                String Nama = rs.getString("Nama");
+                String Password = rs.getString("Password");
+
+                if (user.equals(Nama) && pass.equals(Password)) {
+                    loginSuccess = true;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        if (user.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username harus diisi", "Login", JOptionPane.ERROR_MESSAGE);
+        } else if (pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password harus diisi", "Login", JOptionPane.ERROR_MESSAGE);
+        } else if (loginSuccess) {
+            JOptionPane.showMessageDialog(null, "Login Sukses " + user, "Login", JOptionPane.INFORMATION_MESSAGE);
+            Suara logina = new Suara();
             logina.setVisible(true);
             setVisible(false);
         } else {
@@ -99,7 +137,10 @@ public class formLogin extends javax.swing.JFrame {
         String level = (String) jComboBox1.getSelectedItem();
         if (level.equals("Admin")) {
             loginAdmin();
-        } else {
+        } 
+        else if (level.equals("Guru")){
+            loginGuru();
+        }else {
             loginUser();
         }
     }
@@ -129,7 +170,7 @@ public class formLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Form Login");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/bp1_m6/images (2).jpeg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/project_teori/images (2).jpeg"))); // NOI18N
         jLabel2.setText("jLabel2");
 
         jLabel3.setText("Username");
@@ -166,7 +207,7 @@ public class formLogin extends javax.swing.JFrame {
         jLabel5.setText("Level");
 
         jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User", "Guru" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -234,11 +275,8 @@ public class formLogin extends javax.swing.JFrame {
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
@@ -253,6 +291,12 @@ public class formLogin extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        register r = new register();
+        r.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +323,14 @@ public class formLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(formLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

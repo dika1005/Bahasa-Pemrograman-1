@@ -98,7 +98,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/mycompany/bp1_m6/images (2).jpeg"/>
+          <Image iconType="3" name="/com/mycompany/project_teori/images (2).jpeg"/>
         </Property>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
@@ -154,9 +154,10 @@
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
+          <StringArray count="3">
             <StringItem index="0" value="Admin"/>
             <StringItem index="1" value="User"/>
+            <StringItem index="2" value="Guru"/>
           </StringArray>
         </Property>
       </Properties>

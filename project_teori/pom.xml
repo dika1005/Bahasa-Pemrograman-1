@@ -11,12 +11,19 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>com.mycompany.project_teori.Project_teori</exec.mainClass>
     </properties>
-        <dependencies>
-<!--  MySQL Connector Dependency  -->
-<dependency>
-<groupId>mysql</groupId>
-<artifactId>mysql-connector-java</artifactId>
-<version>8.0.33</version>
-</dependency>
-</dependencies>
+    <dependencies>
+        <!--  MySQL Connector Dependency  -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>7.0.1</version>
+        </dependency>
+    </dependencies>
 </project>
